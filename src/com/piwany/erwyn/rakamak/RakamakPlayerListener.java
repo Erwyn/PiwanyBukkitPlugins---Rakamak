@@ -7,7 +7,6 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -51,16 +50,16 @@ public class RakamakPlayerListener extends PlayerListener {
 		}
 	}
 
-	/**
-	 * Verifying if a player has the right to move
-	 */
-
-	public void onPlayerMove(PlayerMoveEvent event) {
-		Player player = event.getPlayer();
-		if (plugin.notlogged(player)) {
-			player.teleport(plugin.locate(player));
-		}
-	}
+//	/**
+//	 * Verifying if a player has the right to move
+//	 */
+//
+//	public void onPlayerMove(PlayerMoveEvent event) {
+//		Player player = event.getPlayer();
+//		if (plugin.notlogged(player)) {
+//			player.teleport(plugin.locate(player));
+//		}
+//	}
 
 	/**
 	 * Verifying if the player has the right to interact with the world
@@ -101,6 +100,7 @@ public class RakamakPlayerListener extends PlayerListener {
 	public void onPlayerQuit(PlayerQuitEvent event) {
 		Player player = event.getPlayer();
 		if (plugin.notlogged(player)) {
+			player.teleport(plugin.locate(player));
 			plugin.togglePlayer(player);
 		}
 	}
