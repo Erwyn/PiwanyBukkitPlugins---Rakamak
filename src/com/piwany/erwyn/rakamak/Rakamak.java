@@ -22,7 +22,6 @@ public class Rakamak extends JavaPlugin{
 	static String directory = "Rakamak/";
 	static File accounts = new File(directory + "users.rak");
 	private final RakamakPlayerListener playerListener = new RakamakPlayerListener(this);
-	private final RakamakBlockListener blockListener = new RakamakBlockListener(this);
 	private final HashMap<Player,org.bukkit.Location> unlogged = new HashMap<Player,org.bukkit.Location>();
 	
 	/**
@@ -53,9 +52,9 @@ public class Rakamak extends JavaPlugin{
 				accounts.createNewFile();
 			}
 			catch (IOException e){
-				System.out.println("Problème à la création du ficher...");
+				System.out.println("Problem while trying to create file...");
 				e.printStackTrace();
-				System.out.println("Fin de la stackTrace");
+				System.out.println("End of stackTrace");
 			}
 		}
 		
@@ -70,12 +69,10 @@ public class Rakamak extends JavaPlugin{
 		/**
 		 * Les évennements que l'on surveille pour la tenue des comptes
 		 */
-		pm.registerEvent(Event.Type.BLOCK_BREAK, this.blockListener, Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.BLOCK_PLACE, this.blockListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_JOIN, this.playerListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_COMMAND_PREPROCESS, this.playerListener, Event.Priority.Normal, this);
 		pm.registerEvent(Event.Type.PLAYER_QUIT, this.playerListener, Event.Priority.Normal, this);
-//		pm.registerEvent(Event.Type.PLAYER_MOVE, this.playerListener, Event.Priority.Normal,this);
+//deprecated since 2.0		pm.registerEvent(Event.Type.PLAYER_MOVE, this.playerListener, Event.Priority.Normal,this);
 		pm.registerEvent(Event.Type.PLAYER_INTERACT, this.playerListener, Event.Priority.Normal,this);
 		pm.registerEvent(Event.Type.PLAYER_DROP_ITEM, this.playerListener, Event.Priority.Normal,this);
 		pm.registerEvent(Event.Type.PLAYER_PICKUP_ITEM, this.playerListener, Event.Priority.Normal,this);

@@ -39,14 +39,14 @@ public class RakamakPlayerListener extends PlayerListener {
 		plugin.togglePlayer(player);
 		if (AccountsMgmt.hasAccount(player, Rakamak.accounts)) {
 			player.sendMessage(ChatColor.GREEN
-					+ "Bonjour "
+					+ "Hello "
 					+ player.getName()
-					+ ", Pensez à vous authentifier avec /rakapass <votrepassword>");
+					+ ", remember to authenticate with /rakapass <yourpassword>");
 		} else {
 			player.sendMessage(ChatColor.GREEN
-					+ "Bonjour "
+					+ "Welcome "
 					+ player.getName()
-					+ ", Avant toute chose, vous devez vous créer un mot de passe avec la commande /rakaset <votrepassword>");
+					+ ", before doing anything, you have to create a password for your character by typing /rakaset <passwordyouwant>");
 		}
 	}
 
@@ -67,6 +67,7 @@ public class RakamakPlayerListener extends PlayerListener {
 	public void onPlayerInteract(PlayerInteractEvent event) {
 		Player player = event.getPlayer();
 		if (plugin.notlogged(player)) {
+			player.sendMessage(ChatColor.GREEN+"You have to identify yourself with /rakapass <yourpassword> before being able to do anything");
 			event.setCancelled(true);
 		}
 	}
@@ -118,13 +119,13 @@ public class RakamakPlayerListener extends PlayerListener {
 						.equalsIgnoreCase("/rs")) || (cmd[0]
 						.equalsIgnoreCase("/rakapass") || cmd[0]
 						.equalsIgnoreCase("/rp")))) {
-			player.sendMessage("Rakamak: Nombre d'arguments invalide...");
+			player.sendMessage("Rakamak: invalid number of arguments");
 		} else {
 			if ((cmd[0].equalsIgnoreCase("/rakaset"))
 					|| (cmd[0].equalsIgnoreCase("/rs"))) {
 				if (AccountsMgmt.hasAccount(player, Rakamak.accounts)) {
 					player.sendMessage(ChatColor.GREEN
-							+ "Vous avez déjà un mot de passe");
+							+ "You already have a password");
 				} else {
 					AccountsMgmt.addAccount(player, cmd[1], Rakamak.accounts);
 				}
@@ -133,21 +134,21 @@ public class RakamakPlayerListener extends PlayerListener {
 					|| (cmd[0].equalsIgnoreCase("/rp"))) {
 				if (!AccountsMgmt.hasAccount(player, Rakamak.accounts)) {
 					player.sendMessage(ChatColor.GREEN
-							+ "Vous n'avez pas encore de compte, faites /rakaset <votrepass> pour en créer un!");
+							+"You do not have any account yet, please type /rakaset <passwordyouwant> to create one!");
 				} else {
 					if (AccountsMgmt.verify(player, cmd[1], Rakamak.accounts)) {
 						if (plugin.notlogged(player)) {
 							plugin.togglePlayer(player);
 							player.setNoDamageTicks(0);
 							player.sendMessage(ChatColor.GREEN
-									+ "Vous êtes maintenant authentifié, bon jeu");
+									+ "You're now authenticated, have fun");
 						} else {
 							player.sendMessage(ChatColor.GREEN
-									+ "Vous êtes déjà authentifié!!!");
+									+ "You're already authenticated!!!");
 						}
 					} else {
 						player.sendMessage(ChatColor.GREEN
-								+ "Mauvais mot de passe!");
+								+ "Wrong password!");
 					}
 				}
 				event.setCancelled(true);

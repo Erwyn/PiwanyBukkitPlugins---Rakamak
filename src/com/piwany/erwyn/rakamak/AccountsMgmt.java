@@ -57,7 +57,7 @@ public class AccountsMgmt {
 		catch(IOException e){
 			System.out.println(e.getMessage());
 		}
-		player.sendMessage(ChatColor.GREEN+"Votre compte a été créé, /rakapass <votrepass> pour vous identifier!");
+		player.sendMessage(ChatColor.GREEN+"Your account has been created! Please type /rakapass <yourpassword> to authenticate now.");
 	}
 	
 	public static boolean verify(Player player, String pass, File file){
